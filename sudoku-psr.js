@@ -15,32 +15,31 @@ cuadricula = [
 ]
 
 
-/*
-if(check(cuadricula, 8, 2,1)){
-    console.log('Puede ingresarse el valor')
 
-}else{
-    console.log('No se puede ingresar el valor ');
-}
-*/
-
-let valoresRestantes = inicializarMatriz();
+let valoresRestantes = inicializarMatrizVR();
 
 inicializalizarMRV(cuadricula, valoresRestantes);
 
 //console.log(valoresRestantes)
+//let valoresRestantes = inicializarMatrizVR();
 
-function inicializarMatrizMVR(){
 
-    //let valoresRestantes = new Set();
-    //for( let i=0; i< cuadricula.length; i++){ valoresRestantes.add(i+1) }
+
+
+function inicializarMatrizVR(){
+    /*
+        Crea e inicializa la matriz de valores restantes de la cuadricula.
+        Al principio todas las celdas vacias tendran disponibles valores desde 1 a n.
+    */
+
+    let valoresRestantes = [];
+    for( let i=0; i< cuadricula.length; i++){ valoresRestantes.push(i+1) }
 
     //crea una matriz de conjuntos
     return new Array(cuadricula.length)
-        .fill(null).map(
-            ()=> (
-                new Array(cuadricula.length).fill(null).map(()=> (new Set()))
-            ));
+        .fill(null).map(()=> (
+            new Array(cuadricula.length).fill(null).map(()=> ( new Set(valoresRestantes) ))
+        ));
 
 }
 
@@ -53,7 +52,7 @@ function check(cuadricula, valor, fila, columna){
     let filaAux = Math.ceil((fila+1)/3)*3 - 1; // cola de la caja
     let colAux = Math.ceil((columna+1)/3)*3 - 1;// lado derecho de la caja
 
-    //esquinas de las regiones
+    //esquinas de las regiones  #####reubicar la segunda condicion
     if(cuadricula[filaAux][colAux] === valor && filaAux!==fila && colAux!== columna) return false;
     if(cuadricula[filaAux-2][colAux-2] === valor && filaAux!==fila && colAux!== columna) return false;
     if(cuadricula[filaAux-2][colAux] === valor && filaAux!==fila && colAux!== columna) return false;
@@ -70,7 +69,10 @@ function check(cuadricula, valor, fila, columna){
 
 function printRegion(cuadricula, fila, columna){
 
-    /*Imprime la region en el que se encuentra la casilla con coordenadas fila y columna*/
+    /*
+        Imprime la region en el que se encuentra la casilla con coordenadas fila y columna.
+        Solo sirve con regiones 3x3.
+    */
 
     let filaAux = Math.ceil((fila+1)/3)*3 - 1; // cola de la caja
     let colAux = Math.ceil((columna+1)/3)*3 - 1;// lado derecho de la caja
@@ -91,24 +93,49 @@ function printRegion(cuadricula, fila, columna){
 
 function inicializalizarMRV(cuadricula, valoresRestantes){
 
+    /*
+        Inicializacion de la matriz de valores restantes. Se verifican las restricciones de filas, columnas y regiones de
+        toda la cuadricula.
+    */
+
+    //fila
     for(let i=0; i<cuadricula.length; i++){
         actualizarFila(cuadricula, valoresRestantes,i);
     }
 
-    /*for(let i=0; i<cuadricula.length; i++){
+    //columna
+    for(let i=0; i<cuadricula.length; i++){
         actualizarColumna(cuadricula, valoresRestantes,i);
     }
 
 
-
+    //region. Obs.: solo sirve para regiones 3*3
     for(let i= 1; i<= cuadricula.length; i=i*3){
         for(let j=1; j<= cuadricula.length; j=j*3){
-              actualizarRegion(cuadricula, valoresRestantes, i-1, j-1);
-        }
-    }*/
 
-    console.log(valoresRestantes[7][8]);
-    //this.valoresRestantes = valoresRestantes;
+            if(i !== cuadricula.length){
+                if(j !== cuadricula.length){
+                    actualizarRegion(cuadricula, valoresRestantes, i, j);
+                }else{
+                    actualizarRegion(cuadricula, valoresRestantes, i, j-1);
+
+                }
+            }else{
+                if(j !== cuadricula.length){
+                    actualizarRegion(cuadricula, valoresRestantes, i-1, j);
+                }else{
+                    actualizarRegion(cuadricula, valoresRestantes, i-1, j-1);
+
+                }
+            }
+
+        }
+    }
+
+    console.log()
+
+
+
 
 }
 
@@ -122,73 +149,73 @@ function diferencia(setA, setB) {
     return diff;
 }
 
+function removeAll(originalSet, toBeRemovedSet) {
+    /* Elimina el subconjunto toBeRemovedSet del conjunto originalSet*/
+    toBeRemovedSet.forEach(Set.prototype.delete, originalSet);
+}
+
 function actualizarFila(cuadricula, valoresRestantes, fila){
-    
-    //nros del 1 al 9
-    let nrosDisponibles = new Set();
-    for(let i=1; i<=cuadricula.length; i++){ nrosDisponibles.add(i) }
-    
-    //solo quedaran aquellos numeros sin asignar
+
+    // Las restricciones presentes en la fila son guardadas en un conjunto
+    let restricciones = new Set();
     for(let col=0; col<cuadricula.length; col++){
-        if(cuadricula[fila][col] !== 0){ nrosDisponibles.delete( cuadricula[fila][col] )}
+        if(cuadricula[fila][col] !== 0){ restricciones.add(cuadricula[fila][col]) }
     }
 
-
-    //let conjuntos = valoresRestantes[fila]
+    //Las restricciones son eliminadas de los valores restantes
     for(let col=0; col<cuadricula.length; col++){
 
         if(cuadricula[fila][col] === 0){
-
-            valoresRestantes[fila][col] = new Set([...nrosDisponibles, ...valoresRestantes[fila][col]]); //merge sets
+            removeAll(valoresRestantes[fila][col], restricciones);
         }else{
             valoresRestantes[fila][col].clear();
         }
     }
-
 
 }
 
 
 function actualizarColumna(cuadricula, valoresRestantes, col){
 
-    //nros del 1 al 9
-    let nrosDisponibles = new Set();
-    for(let i=1; i<=cuadricula.length; i++){ nrosDisponibles.add(i) }
-
-    //solo quedaran aquellos numeros sin asignar
+    // Las restricciones presentes en la columna son guardadas en un conjunto
+    let restricciones = new Set();
     for(let fila=0; fila<cuadricula.length; fila++){
-        if(cuadricula[fila][col] !== 0){ nrosDisponibles.delete( cuadricula[fila][col] )}
+        if(cuadricula[fila][col] !== 0){ restricciones.add(cuadricula[fila][col]) }
     }
 
+    //Las restricciones son eliminadas de los valores restantes
     for(let fila=0; fila<cuadricula.length; fila++){
+
         if(cuadricula[fila][col] === 0){
-            valoresRestantes[fila][col] = new Set([...nrosDisponibles, ...valoresRestantes[fila][col]]);
+            removeAll(valoresRestantes[fila][col], restricciones);
         }else{
             valoresRestantes[fila][col].clear();
-
         }
     }
 
 }
 
 function actualizarRegion(cuadricula, valoresRestantes, fila, columna){
-
-    let nrosDisponibles = new Set();
-    for(let i=1; i<=cuadricula.length; i++){ nrosDisponibles.add(i) }
+    /*
+        Verifica las restricciones en una region 3x3 y actualiza los valores restantes que
+        puede ser asignados a las celdas de la region.
+    */
 
     let filaAux = Math.ceil((fila+1)/3)*3 - 1; // cola de la caja
     let colAux = Math.ceil((columna+1)/3)*3 - 1;// lado derecho de la caja
 
+    let restricciones = new Set();
     for(let i=filaAux-2, m=0 ; m<3; i++, m++){
         for( let j=colAux-2, n=0; n<3; j++, n++){
-           if(cuadricula[i][j]!== 0){ nrosDisponibles.delete( cuadricula[i][j] ) }
+            let v = cuadricula[i][j];
+           if(cuadricula[i][j]!== 0){ restricciones.add( cuadricula[i][j] ) }
         }
     }
 
     for(let i=filaAux-2, m=0 ; m<3; i++, m++){
         for( let j=colAux-2, n=0; n<3; j++, n++){
             if(cuadricula[i][j] === 0){
-                valoresRestantes[i][j] = new Set([...nrosDisponibles, ...valoresRestantes[i][j]])
+               removeAll(valoresRestantes[i][j], restricciones)
             }else{
                 valoresRestantes[i][j].clear();
             }
