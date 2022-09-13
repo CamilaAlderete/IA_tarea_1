@@ -1,31 +1,55 @@
+//https://sudokuspoiler.com/sudoku/sudoku9
+
+var valoresPosibles = [1,2,3,4,5,6,7,8,9];
+
 main()
+
 
 function main() {
 
-    //dificultad media
-    cuadricula = [
-        [0, 0, 0, 0, 8, 3, 1, 4, 9],
-        [9, 0, 0, 0, 0, 5, 8, 0, 2],
-        [0, 0, 0, 1, 9, 6, 0, 5, 0],
 
-        [0, 0, 8, 3, 5, 0, 0, 0, 7],
-        [0, 0, 0, 0, 0, 2, 3, 0, 5],
-        [0, 0, 0, 8, 6, 7, 0, 0, 0],
+    //dificultad experto
+    let cuadricula = [
+        [0, 0, 0,   0, 0, 2,    0, 8, 0],
+        [0, 0, 9,   0, 7, 0,    0, 0, 4],
+        [0, 2, 0,   5, 0, 9,    0, 0, 0],
 
-        [0, 7, 0, 0, 0, 8, 0, 0, 1],
-        [0, 8, 4, 7, 0, 0, 0, 2, 0],
-        [2, 0, 3, 6, 0, 4, 9, 7, 8]
+        [0, 0, 0,   0, 0, 0,    0, 4, 0],
+        [0, 6, 5,   3, 0, 8,    0, 0, 0],
+        [0, 0, 0,   9, 0, 0,    6, 0, 1],
+
+        [0, 0, 0,   1, 0, 0,    0, 0, 5],
+        [5, 0, 0,   0, 0, 0,    2, 0, 0],
+        [0, 9, 7,   8, 0, 0,    0, 0, 0]
     ]
 
+    //dificultad media
+    let cuadricula2 = [
+        [0, 0, 0,   0, 8, 3,    1, 4, 9],
+        [9, 0, 0,   0, 0, 5,    8, 0, 2],
+        [0, 0, 0,   1, 9, 6,    0, 5, 0],
 
-    let matrizValoresRestantes = inicializarMatrizVR();
+        [0, 0, 8,   3, 5, 0,    0, 0, 7],
+        [0, 0, 0,   0, 0, 2,    3, 0, 5],
+        [0, 0, 0,   8, 6, 7,    0, 0, 0],
+
+        [0, 7, 0,   0, 0, 8,    0, 0, 1],
+        [0, 8, 4,   7, 0, 0,    0, 2, 0],
+        [2, 0, 3,   6, 0, 4,    9, 7, 8]
+    ]
+
+    let sudokuStr = 'Entrada: \n'+toString(cuadricula);
+
+    let matrizValoresRestantes = inicializarMatrizVR(cuadricula);
 
     inicializalizarMRV(cuadricula, matrizValoresRestantes);
 
-    let casilla = getCasillaMenosRestringida(cuadricula, matrizValoresRestantes);
+    if(resolverSudoku( cuadricula, copiar(matrizValoresRestantes)) ){
 
-    if(resolverSudoku(cuadricula, matrizValoresRestantes, casilla)){
-        console.log('Sudoku resuelto');
+        console.log('Sudoku resuelto, mirar archivo txt');
+        sudokuStr = sudokuStr + 'Salida: \n'+toString(cuadricula);
+        writeFile(sudokuStr);
+
     }else{
         console.log('No pudo resolverse')
     }
@@ -34,8 +58,29 @@ function main() {
 
 }
 
+function toString(cuadricula){
 
-function resolverSudoku(cuadricula, matrizValoresRestantes, casilla){
+    let output = '';
+    for(let i=0; i< cuadricula.length; i++){
+        output = output + cuadricula[i].toString() + '\n';
+    }
+
+    return output + '\n';
+}
+
+function writeFile(str){
+
+    var fs  = require('fs')
+
+    var writeStream = fs.createWriteStream("sudoku.txt");
+    writeStream.write(str);
+    writeStream.end();
+}
+
+
+function resolverSudoku(cuadricula, matrizValoresRestantes){
+
+    let casilla = getCasillaMenosRestringida(cuadricula, matrizValoresRestantes);
 
     let fila = casilla.fila;
     let col = casilla.col;
@@ -50,25 +95,34 @@ function resolverSudoku(cuadricula, matrizValoresRestantes, casilla){
 
     for (const valor of valoresRestantes) {
 
-        cuadricula[fila][col] = valor;
-        actualizarCuadricula(cuadricula,matrizValoresRestantes,fila,col);
+        /*
+            Para asignar valor a una celda, se envia una copia de la matriz con valores disponibles ya que en caso de que el dfs deba retroceder
+            es dificil restaurar la matriz con los valores restantes a su estado anterior. (Emulacion de paso de matriz por valor)
+        */
 
-        let casillaMenosRestringida = getCasillaMenosRestringida(cuadricula, matrizValoresRestantes);
-        if (resolverSudoku(cuadricula, matrizValoresRestantes, casillaMenosRestringida)){
+        if ( asignarValor(cuadricula, copiar(matrizValoresRestantes), fila, col, valor) ){
             return true;
         }
-        console.log()
+
+        cuadricula[fila][col] = 0;
 
     }
 
     console.log()
-    cuadricula[fila][col] = 0;
-    actualizarCuadricula(cuadricula,matrizValoresRestantes,fila,col);
     return false;
 
+}
 
+
+
+function asignarValor(cuadricula, matrizValoresRestantes, fila, col, valor){
+
+    cuadricula[fila][col] = valor;
+    actualizarCuadricula(cuadricula,matrizValoresRestantes,fila,col);
+    return resolverSudoku(cuadricula, matrizValoresRestantes);
 
 }
+
 
 function actualizarCuadricula(cuadricula, matrizValoresRestantes, fila, columna){
     /*
@@ -88,7 +142,7 @@ function actualizarCuadricula(cuadricula, matrizValoresRestantes, fila, columna)
 }
 
 
-function inicializarMatrizVR(){
+function inicializarMatrizVR(cuadricula){
     /*
         Crea e inicializa la matriz de valores restantes de la cuadricula.
         Al principio todas las celdas vacias tendran disponibles valores desde 1 a n.
@@ -105,29 +159,6 @@ function inicializarMatrizVR(){
 
 }
 
-
-function check(cuadricula, valor, fila, columna){
-
-    /*Chequea si un valor puede ingresarse en las coordenadas fila y columna*/
-
-    //filas y columnas finales de las regiones de dimension 3x3
-    let filaAux = Math.ceil((fila+1)/3)*3 - 1; // cola de la caja
-    let colAux = Math.ceil((columna+1)/3)*3 - 1;// lado derecho de la caja
-
-    //esquinas de las regiones  #####reubicar la segunda condicion
-    if(cuadricula[filaAux][colAux] === valor && filaAux!==fila && colAux!== columna) return false;
-    if(cuadricula[filaAux-2][colAux-2] === valor && filaAux!==fila && colAux!== columna) return false;
-    if(cuadricula[filaAux-2][colAux] === valor && filaAux!==fila && colAux!== columna) return false;
-    if(cuadricula[filaAux][colAux-2] ===  valor && filaAux!==fila && colAux!== columna) return false;
-
-    //horizontal y vertical
-    for( let i = 0; i< cuadricula.length; i++){
-        if(cuadricula[fila][i] === valor && columna !== i) return false;
-        if(cuadricula[i][columna]=== valor && fila !== i) return false;
-    }
-
-    return true;
-}
 
 function printRegion(cuadricula, fila, columna){
 
@@ -309,7 +340,27 @@ function getCasillaMenosRestringida( cuadricula, matrizValoresRestantes ){
         }
     }
 
-    return { valoresRestantes: valoresRestantes, fila: fila, col: col, sudokuResuelto: sudokuResuelto};
+    return { valoresRestantes: Array.from(valoresRestantes), fila: fila, col: col, sudokuResuelto: sudokuResuelto};
 
 }
 
+function copiar(matrizValoresRestantes){
+
+
+    let copia = new Array( matrizValoresRestantes.length)
+        .fill(null).map(()=> (
+            new Array(matrizValoresRestantes.length)
+            ));
+
+
+    for(let i=0; i<matrizValoresRestantes.length; i++){
+        for(let j=0;j<matrizValoresRestantes.length; j++){
+            copia[i][j] = new Set( matrizValoresRestantes[i][j] );
+            //copia[i][j] = new Set( Array.from(matrizValoresRestantes[i][j]) );
+        }
+    }
+
+    return copia;
+
+
+}
