@@ -1,6 +1,6 @@
 //https://sudokuspoiler.com/sudoku/sudoku9
+//https://sudoku.com/es/evil/
 
-var valoresPosibles = [1,2,3,4,5,6,7,8,9];
 
 main()
 
@@ -9,7 +9,7 @@ function main() {
 
 
     //dificultad experto
-    let cuadricula = [
+    let cuadricula3 = [
         [0, 0, 0,   0, 0, 2,    0, 8, 0],
         [0, 0, 9,   0, 7, 0,    0, 0, 4],
         [0, 2, 0,   5, 0, 9,    0, 0, 0],
@@ -38,13 +38,28 @@ function main() {
         [2, 0, 3,   6, 0, 4,    9, 7, 8]
     ]
 
+    //demoniaco
+    let cuadricula = [
+        [0, 0, 0,   0, 0, 3,    0, 0, 0],
+        [0, 0, 1,   0, 0, 0,    2, 0, 0],
+        [7, 0, 0,   6, 0, 9,    0, 0, 1],
+
+        [0, 0, 0,   0, 3, 0,    0, 0, 6],
+        [0, 9, 0,   5, 0, 6,    4, 0, 0],
+        [5, 0, 0,   0, 2, 0,    0, 0, 0],
+
+        [0, 0, 0,   0, 5, 0,    0, 0, 0],
+        [9, 0, 0,   7, 0, 1,    0, 0, 2],
+        [0, 4, 0,   0, 0, 0,    0, 8, 0]
+    ]
+
     let sudokuStr = 'Entrada: \n'+toString(cuadricula);
 
     let matrizValoresRestantes = inicializarMatrizVR(cuadricula);
 
     inicializalizarMRV(cuadricula, matrizValoresRestantes);
 
-    if(resolverSudoku( cuadricula, copiar(matrizValoresRestantes)) ){
+    if( resolverSudoku( cuadricula, matrizValoresRestantes) ){
 
         console.log('Sudoku resuelto, mirar archivo txt');
         sudokuStr = sudokuStr + 'Salida: \n'+toString(cuadricula);
