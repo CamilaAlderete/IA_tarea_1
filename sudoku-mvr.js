@@ -3,12 +3,16 @@
 
 
 main()
+//main2();
+//main3();
 
+function main3(){
+    let str = '5123';
+    console.log(str.length);
+}
 
-function main() {
+function main2(){
 
-
-    //dificultad experto
     let cuadricula3 = [
         [0, 0, 0,   0, 0, 2,    0, 8, 0],
         [0, 0, 9,   0, 7, 0,    0, 0, 4],
@@ -23,8 +27,30 @@ function main() {
         [0, 9, 7,   8, 0, 0,    0, 0, 0]
     ]
 
+    printRegion(cuadricula3, 3,8);
+
+}
+
+function main() {
+
+
+    //dificultad experto
+    let cuadricula2_3x3 = [
+        [0, 0, 0,   0, 0, 2,    0, 8, 0],
+        [0, 0, 9,   0, 7, 0,    0, 0, 4],
+        [0, 2, 0,   5, 0, 9,    0, 0, 0],
+
+        [0, 0, 0,   0, 0, 0,    0, 4, 0],
+        [0, 6, 5,   3, 0, 8,    0, 0, 0],
+        [0, 0, 0,   9, 0, 0,    6, 0, 1],
+
+        [0, 0, 0,   1, 0, 0,    0, 0, 5],
+        [5, 0, 0,   0, 0, 0,    2, 0, 0],
+        [0, 9, 7,   8, 0, 0,    0, 0, 0]
+    ]
+
     //dificultad media
-    let cuadricula2 = [
+    let cuadricula1_3x3 = [
         [0, 0, 0,   0, 8, 3,    1, 4, 9],
         [9, 0, 0,   0, 0, 5,    8, 0, 2],
         [0, 0, 0,   1, 9, 6,    0, 5, 0],
@@ -39,7 +65,7 @@ function main() {
     ]
 
     //demoniaco
-    let cuadricula = [
+    let cuadricula3_3x3 = [
         [0, 0, 0,   0, 0, 3,    0, 0, 0],
         [0, 0, 1,   0, 0, 0,    2, 0, 0],
         [7, 0, 0,   6, 0, 9,    0, 0, 1],
@@ -51,6 +77,54 @@ function main() {
         [0, 0, 0,   0, 5, 0,    0, 0, 0],
         [9, 0, 0,   7, 0, 1,    0, 0, 2],
         [0, 4, 0,   0, 0, 0,    0, 8, 0]
+    ]
+
+    //facil
+    let cuadricula1_16x16 = [
+        [ 0,11, 9, 0,    0,16,13, 4,     0, 0,14, 0,     10, 6,15, 0],
+        [ 4,12,15, 0,    3, 6, 0,11,     0, 5, 0, 1,     16, 7,14, 2],
+        [ 1, 0, 6, 0,   15, 2, 0, 0,    11, 9,10, 0,      0, 0, 8, 0],
+        [ 0,13, 0, 0,    0, 1, 0, 0,     4, 6, 0,15,      0, 0, 0, 0],
+
+        [ 0, 0, 0, 0,    0, 0,15, 0,     8, 1, 5, 3,      0, 4,11, 7],
+        [ 6, 0, 1, 0,    0,12, 8, 0,     9, 0, 0, 2,      0, 0, 3, 0],
+        [14, 0, 4,13,    6, 0, 0, 3,     0,12, 7,10,      8, 0, 2, 0],
+        [ 3, 8, 0, 0,    4, 7, 2, 0,     6, 0, 0, 0,      0,12,16, 5],
+
+        [13, 0, 0,16,    0, 8,14,10,     3, 4,15, 0,     12, 5, 1,11],
+        [ 0, 0, 0, 6,    2, 0, 0, 1,    10, 0,11, 0,     15, 3, 0, 9],
+        [ 7, 0, 0,12,    0, 4, 0,15,     5, 0, 9,14,      0, 0, 0, 0],
+        [10, 0, 0, 8,    0, 0,11, 0,     0, 0, 1,12,      4, 0,13,16],
+
+        [ 0, 0, 0, 0,    0, 0, 7, 0,    15, 2, 0, 0,      0, 0,12, 3],
+        [ 0, 0, 7, 0,    0,10, 6, 0,     1, 8, 0,13,     11, 0, 9,14],
+        [ 8, 6, 5, 0,    0, 3, 0, 0,    14, 0, 0, 9,      0, 0, 0, 0],
+        [ 0,16, 0, 2,    0, 0, 0,14,     0,10, 0, 0,      0, 0, 0, 0],
+
+    ]
+
+    //medio
+    let cuadricula = [
+        [ 8, 7, 0, 0,    0, 0, 0, 0,     0, 3, 0, 0,     13, 0, 4, 0],
+        [ 0, 5,14, 0,    0, 0, 3,10,    15, 9, 1, 0,      0, 6, 0, 0],
+        [16, 0, 0, 0,    5, 8, 7, 0,     0,14, 0, 0,      9, 0,11,12],
+        [ 0, 0, 4, 0,    0,14, 6,13,     0,11,10,12,      0, 7, 0, 3],
+
+        [14, 0, 0, 8,    0, 0, 1, 0,     0, 0, 0, 3,      7, 4,12, 0],
+        [ 9, 0, 0, 0,    0, 6,15,12,     0, 0,13,14,      0, 3, 1, 0],
+        [11, 0,10, 3,    0, 0,13, 0,     0, 8, 0, 1,      0, 0, 6, 0],
+        [ 6, 0, 0, 1,   14, 0, 4, 0,     0, 5, 0, 9,     11, 0, 0,13],
+
+        [ 0, 0, 0, 0,   15, 0, 0, 0,     0, 0, 9, 0,      5, 0, 2,10],
+        [10, 1, 0, 0,    6, 0, 5, 0,    13,15, 7,16,      0, 0, 0, 0],
+        [ 0, 0,16,11,    0, 4, 0, 8,     2, 0, 0, 0,      0,13, 0, 7],
+        [ 0, 9, 0, 7,    1, 3, 0, 2,     6, 0, 8,10,     16,15,14, 4],
+
+        [ 7, 0,13, 0,    9,16, 0, 5,     0, 0,14, 4,      3, 8, 0, 2],
+        [ 0, 0, 3, 0,   10, 0, 0, 0,     0, 0, 0, 0,      0,16,15, 0],
+        [ 1, 0, 9, 0,    0, 0,14, 4,     0, 0, 0, 0,      0, 0, 7, 0],
+        [ 0, 6, 8, 0,    3, 0, 0, 0,    10, 7, 0, 0,      0, 0, 0, 0],
+
     ]
 
     let sudokuStr = 'Entrada: \n'+toString(cuadricula);
@@ -76,8 +150,26 @@ function main() {
 function toString(cuadricula){
 
     let output = '';
+    let str = '';
+
     for(let i=0; i< cuadricula.length; i++){
-        output = output + cuadricula[i].toString() + '\n';
+
+        let row = '';
+        for(let j=0; j< cuadricula.length; j++) {
+
+            str = cuadricula[i][j].toString();
+            if (str.length === 1) {
+                str = '   ' + str;
+            }else{
+                str = '  ' + str;
+            }
+
+            row = row + str;
+
+        }
+
+        output = output + row + '\n';
+
     }
 
     return output + '\n';
@@ -87,7 +179,7 @@ function writeFile(str){
 
     var fs  = require('fs')
 
-    var writeStream = fs.createWriteStream("sudoku.txt");
+    var writeStream = fs.createWriteStream("resultado.txt");
     writeStream.write(str);
     writeStream.end();
 }
@@ -150,7 +242,7 @@ function actualizarCuadricula(cuadricula, matrizValoresRestantes, fila, columna)
     //columna
     actualizarColumna(cuadricula, matrizValoresRestantes, columna);
     
-    //region. Obs.: solo sirve para regiones 3*3
+    //region
     actualizarRegion(cuadricula, matrizValoresRestantes, fila, columna);
 
 
@@ -179,17 +271,19 @@ function printRegion(cuadricula, fila, columna){
 
     /*
         Imprime la region en el que se encuentra la casilla con coordenadas fila y columna.
-        Solo sirve con regiones 3x3.
+
     */
 
-    let filaAux = Math.ceil((fila+1)/3)*3 - 1; // cola de la caja
-    let colAux = Math.ceil((columna+1)/3)*3 - 1;// lado derecho de la caja
+    let salto = calcularSalto(cuadricula.length); //se asume que siempre va ser entero
+
+    let filaAux = Math.ceil((fila+1)/salto)*salto - 1; // cola de la caja
+    let colAux = Math.ceil((columna+1)/salto)*salto - 1;// lado derecho de la caja
 
 
     let region= "";
 
-    for(let i=filaAux-2, m=0 ; m<3; i++, m++){
-        for( let j=colAux-2, n=0; n<3; j++, n++){
+    for(let i=filaAux-(salto-1), m=0 ; m<salto; i++, m++){
+        for( let j=colAux-(salto-1), n=0; n<salto; j++, n++){
             region = region + cuadricula[i][j].toString();
         }
         region = region + '\n';
@@ -217,9 +311,11 @@ function inicializalizarMRV(cuadricula, matrizValoresRestantes){
     }
 
 
-    //region. Obs.: solo sirve para regiones 3*3
-    for(let i= 1; i<= cuadricula.length; i=i*3){
-        for(let j=1; j<= cuadricula.length; j=j*3){
+    //region
+    let salto = calcularSalto(cuadricula.length);
+
+    for(let i= 1; i<= cuadricula.length; i=i*salto){
+        for(let j=1; j<= cuadricula.length; j=j*salto){
 
             if(i !== cuadricula.length){
                 if(j !== cuadricula.length){
@@ -305,20 +401,21 @@ function actualizarRegion(cuadricula, matrizValoresRestantes, fila, columna){
         pueden ser asignados a las celdas de la region.
     */
 
-    let filaAux = Math.ceil((fila+1)/3)*3 - 1; // cola de la caja
-    let colAux = Math.ceil((columna+1)/3)*3 - 1;// lado derecho de la caja
+    let salto = calcularSalto(cuadricula.length);
+    let filaAux = Math.ceil((fila+1)/salto)*salto - 1; // cola de la region
+    let colAux = Math.ceil((columna+1)/salto)*salto - 1;// lado derecho de la region
 
     //colecta todas las restricciones presentes en la region
     let restricciones = new Set();
-    for(let i=filaAux-2, m=0 ; m<3; i++, m++){
-        for( let j=colAux-2, n=0; n<3; j++, n++){
+    for(let i=filaAux-(salto-1), m=0 ; m<salto; i++, m++){
+        for( let j=colAux-(salto-1), n=0; n<salto; j++, n++){
            if(cuadricula[i][j]!== 0){ restricciones.add( cuadricula[i][j] ) }
         }
     }
 
     //elimina el subconjunto restricciones del conjunto valores restantes de la region
-    for(let i=filaAux-2, m=0 ; m<3; i++, m++){
-        for( let j=colAux-2, n=0; n<3; j++, n++){
+    for(let i=filaAux-(salto-1), m=0 ; m<salto; i++, m++){
+        for( let j=colAux-(salto-1), n=0; n<salto; j++, n++){
             if(cuadricula[i][j] === 0){
                removeAll(matrizValoresRestantes[i][j], restricciones)
             }else{
@@ -378,4 +475,8 @@ function copiar(matrizValoresRestantes){
     return copia;
 
 
+}
+
+function calcularSalto(dimMatriz){
+    return Math.sqrt(dimMatriz); //se asume que siempre va ser entero
 }
