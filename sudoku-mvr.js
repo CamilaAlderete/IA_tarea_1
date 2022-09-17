@@ -5,6 +5,8 @@
 main();
 
 function main() {
+    //Tiempo de inicio
+    var start = new Date().getTime();
 
 
     //dificultad experto
@@ -116,8 +118,10 @@ function main() {
         console.log('No pudo resolverse')
     }
 
-    console.log()
-
+    //Tiempo de finalizacion
+    var end = new Date().getTime();
+    var time = end - start;
+    console.log('Tiempo de ejecucion: ' + time+' ms');
 }
 
 function toString(cuadricula){
@@ -150,7 +154,7 @@ function toString(cuadricula){
 
 function writeFile(str){
 
-    var fs  = require('fs')
+    var fs  = require('fs');
 
     var writeStream = fs.createWriteStream("resultado.txt");
     writeStream.write(str);
@@ -187,8 +191,10 @@ function resolverSudoku(cuadricula, matrizValoresRestantes){
         cuadricula[fila][col] = 0;
 
     }
-
-    console.log()
+    // console.log('------------------------------------');
+    // console.log(toString(cuadricula));
+    // console.log('Valores restantes : '+valoresRestantes);
+    // console.log('------------------------------------');
     return false;
 
 }
