@@ -2,34 +2,7 @@
 //https://sudoku.com/es/evil/
 
 
-main()
-//main2();
-//main3();
-
-function main3(){
-    let str = '5123';
-    console.log(str.length);
-}
-
-function main2(){
-
-    let cuadricula3 = [
-        [0, 0, 0,   0, 0, 2,    0, 8, 0],
-        [0, 0, 9,   0, 7, 0,    0, 0, 4],
-        [0, 2, 0,   5, 0, 9,    0, 0, 0],
-
-        [0, 0, 0,   0, 0, 0,    0, 4, 0],
-        [0, 6, 5,   3, 0, 8,    0, 0, 0],
-        [0, 0, 0,   9, 0, 0,    6, 0, 1],
-
-        [0, 0, 0,   1, 0, 0,    0, 0, 5],
-        [5, 0, 0,   0, 0, 0,    2, 0, 0],
-        [0, 9, 7,   8, 0, 0,    0, 0, 0]
-    ]
-
-    printRegion(cuadricula3, 3,8);
-
-}
+main();
 
 function main() {
 
