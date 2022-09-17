@@ -5,9 +5,6 @@
 main();
 
 function main() {
-    //Tiempo de inicio
-    var start = new Date().getTime();
-
 
     //dificultad experto
     let cuadricula2_3x3 = [
@@ -103,6 +100,9 @@ function main() {
     ]
 
     let sudokuStr = 'Entrada: \n'+toString(cuadricula);
+
+    //Tiempo de inicio
+    var start = new Date().getTime();
 
     let matrizValoresRestantes = inicializarMatrizVR(cuadricula);
 
