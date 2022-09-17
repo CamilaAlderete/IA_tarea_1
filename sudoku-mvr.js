@@ -69,7 +69,7 @@ function main() {
         console.log('No pudo resolverse')
     }
 
-    console.log()
+    console.log(sudokuStr);
 
 }
 
@@ -85,7 +85,7 @@ function toString(cuadricula){
 
 function writeFile(str){
 
-    var fs  = require('fs')
+    var fs  = require('fs');
 
     var writeStream = fs.createWriteStream("sudoku.txt");
     writeStream.write(str);
@@ -122,8 +122,10 @@ function resolverSudoku(cuadricula, matrizValoresRestantes){
         cuadricula[fila][col] = 0;
 
     }
-
-    console.log()
+    console.log('------------------------------------');
+    console.log(toString(cuadricula));
+    console.log('Valores restantes : '+valoresRestantes);
+    console.log('------------------------------------');
     return false;
 
 }
