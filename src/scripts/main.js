@@ -1,8 +1,8 @@
 //https://sudokuspoiler.com/sudoku/sudoku9
 //https://sudoku.com/es/evil/
-import sudokus_9x9_easy from '../sudokus y soluciones/sudokus_9x9_easy.js';
-import sudokus_16x16_easy from '../sudokus y soluciones/sudokus_16x16_easy.js';
-import sudokus_16x16_medium from "../sudokus y soluciones/sudokus_16x16_medium.js";
+import sudokus_9x9_easy from '../../sudokus y soluciones/sudokus_9x9_easy.js';
+import sudokus_16x16_easy from '../../sudokus y soluciones/sudokus_16x16_easy.js';
+import sudokus_16x16_medium from "../../sudokus y soluciones/sudokus_16x16_medium.js";
 
 import resolverPorBacktracking from "./backtracking.js"
 import resolverPorLasVegas from "./lasVegas.js"
