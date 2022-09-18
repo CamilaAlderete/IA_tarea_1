@@ -1,12 +1,19 @@
 //https://sudokuspoiler.com/sudoku/sudoku9
 //https://sudoku.com/es/evil/
+import sudokus_9x9_easy from './sudokus y soluciones/sudokus_9x9_easy.js';
+import sudokus_16x16_easy from './sudokus y soluciones/sudokus_16x16_easy.js';
+import sudokus_16x16_medium from "./sudokus y soluciones/sudokus_16x16_medium.js";
 
+import fs from 'fs'; //en vez de -> let fs  = require('fs');
+
+var nodosExpandidos = 0;
 
 main();
 
+
 function main() {
 
-    //dificultad experto
+    //dificultad experto cuadricula2_3x3
     let cuadricula2_3x3 = [
         [0, 0, 0,   0, 0, 2,    0, 8, 0],
         [0, 0, 9,   0, 7, 0,    0, 0, 4],
@@ -21,7 +28,7 @@ function main() {
         [0, 9, 7,   8, 0, 0,    0, 0, 0]
     ]
 
-    //dificultad media
+    //dificultad media cuadricula1_3x3
     let cuadricula1_3x3 = [
         [0, 0, 0,   0, 8, 3,    1, 4, 9],
         [9, 0, 0,   0, 0, 5,    8, 0, 2],
@@ -36,7 +43,7 @@ function main() {
         [2, 0, 3,   6, 0, 4,    9, 7, 8]
     ]
 
-    //demoniaco
+    //demoniaco cuadricula3_3x3
     let cuadricula3_3x3 = [
         [0, 0, 0,   0, 0, 3,    0, 0, 0],
         [0, 0, 1,   0, 0, 0,    2, 0, 0],
@@ -51,66 +58,35 @@ function main() {
         [0, 4, 0,   0, 0, 0,    0, 8, 0]
     ]
 
-    //facil
-    let cuadricula1_16x16 = [
-        [ 0,11, 9, 0,    0,16,13, 4,     0, 0,14, 0,     10, 6,15, 0],
-        [ 4,12,15, 0,    3, 6, 0,11,     0, 5, 0, 1,     16, 7,14, 2],
-        [ 1, 0, 6, 0,   15, 2, 0, 0,    11, 9,10, 0,      0, 0, 8, 0],
-        [ 0,13, 0, 0,    0, 1, 0, 0,     4, 6, 0,15,      0, 0, 0, 0],
 
-        [ 0, 0, 0, 0,    0, 0,15, 0,     8, 1, 5, 3,      0, 4,11, 7],
-        [ 6, 0, 1, 0,    0,12, 8, 0,     9, 0, 0, 2,      0, 0, 3, 0],
-        [14, 0, 4,13,    6, 0, 0, 3,     0,12, 7,10,      8, 0, 2, 0],
-        [ 3, 8, 0, 0,    4, 7, 2, 0,     6, 0, 0, 0,      0,12,16, 5],
+    //let cuadricula = copiarSudoku(sudokus_9x9_easy[3]);
+    //let cuadricula = copiarSudoku(sudokus_16x16_easy[0]);
+    let cuadricula = copiarSudoku(sudokus_16x16_medium[0]);
 
-        [13, 0, 0,16,    0, 8,14,10,     3, 4,15, 0,     12, 5, 1,11],
-        [ 0, 0, 0, 6,    2, 0, 0, 1,    10, 0,11, 0,     15, 3, 0, 9],
-        [ 7, 0, 0,12,    0, 4, 0,15,     5, 0, 9,14,      0, 0, 0, 0],
-        [10, 0, 0, 8,    0, 0,11, 0,     0, 0, 1,12,      4, 0,13,16],
-
-        [ 0, 0, 0, 0,    0, 0, 7, 0,    15, 2, 0, 0,      0, 0,12, 3],
-        [ 0, 0, 7, 0,    0,10, 6, 0,     1, 8, 0,13,     11, 0, 9,14],
-        [ 8, 6, 5, 0,    0, 3, 0, 0,    14, 0, 0, 9,      0, 0, 0, 0],
-        [ 0,16, 0, 2,    0, 0, 0,14,     0,10, 0, 0,      0, 0, 0, 0],
-
-    ]
-
-    //medio
-    let cuadricula = [
-        [ 8, 7, 0, 0,    0, 0, 0, 0,     0, 3, 0, 0,     13, 0, 4, 0],
-        [ 0, 5,14, 0,    0, 0, 3,10,    15, 9, 1, 0,      0, 6, 0, 0],
-        [16, 0, 0, 0,    5, 8, 7, 0,     0,14, 0, 0,      9, 0,11,12],
-        [ 0, 0, 4, 0,    0,14, 6,13,     0,11,10,12,      0, 7, 0, 3],
-
-        [14, 0, 0, 8,    0, 0, 1, 0,     0, 0, 0, 3,      7, 4,12, 0],
-        [ 9, 0, 0, 0,    0, 6,15,12,     0, 0,13,14,      0, 3, 1, 0],
-        [11, 0,10, 3,    0, 0,13, 0,     0, 8, 0, 1,      0, 0, 6, 0],
-        [ 6, 0, 0, 1,   14, 0, 4, 0,     0, 5, 0, 9,     11, 0, 0,13],
-
-        [ 0, 0, 0, 0,   15, 0, 0, 0,     0, 0, 9, 0,      5, 0, 2,10],
-        [10, 1, 0, 0,    6, 0, 5, 0,    13,15, 7,16,      0, 0, 0, 0],
-        [ 0, 0,16,11,    0, 4, 0, 8,     2, 0, 0, 0,      0,13, 0, 7],
-        [ 0, 9, 0, 7,    1, 3, 0, 2,     6, 0, 8,10,     16,15,14, 4],
-
-        [ 7, 0,13, 0,    9,16, 0, 5,     0, 0,14, 4,      3, 8, 0, 2],
-        [ 0, 0, 3, 0,   10, 0, 0, 0,     0, 0, 0, 0,      0,16,15, 0],
-        [ 1, 0, 9, 0,    0, 0,14, 4,     0, 0, 0, 0,      0, 0, 7, 0],
-        [ 0, 6, 8, 0,    3, 0, 0, 0,    10, 7, 0, 0,      0, 0, 0, 0],
-
-    ]
-
-    let sudokuStr = 'Entrada: \n'+toString(cuadricula);
-
-    //Tiempo de inicio
-    var start = new Date().getTime();
 
     let matrizValoresRestantes = inicializarMatrizVR(cuadricula);
 
     inicializalizarMRV(cuadricula, matrizValoresRestantes);
 
-    if( resolverSudoku( cuadricula, matrizValoresRestantes) ){
+    heuristica(cuadricula, matrizValoresRestantes);
+    //lasVegas(cuadricula, matrizValoresRestantes);
+    //backtracking(cuadricula, matrizValoresRestantes);
 
-        console.log('Sudoku resuelto, mirar archivo txt');
+}
+
+
+
+function lasVegas(cuadricula, matrizValoresRestantes){
+
+
+    //Tiempo de inicio
+    let start = new Date().getTime();
+
+    let sudokuStr = 'Entrada: \n'+toString(cuadricula);
+
+    if( resolverSudokuLasVegas( cuadricula, matrizValoresRestantes) ){
+
+        console.log('Sudoku resuelto por Las Vegas, mirar el archivo resultado.txt');
         sudokuStr = sudokuStr + 'Salida: \n'+toString(cuadricula);
         writeFile(sudokuStr);
 
@@ -118,10 +94,68 @@ function main() {
         console.log('No pudo resolverse')
     }
 
+
     //Tiempo de finalizacion
-    var end = new Date().getTime();
-    var time = end - start;
+    let end = new Date().getTime();
+    let time = end - start;
     console.log('Tiempo de ejecucion: ' + time+' ms');
+
+}
+
+
+function heuristica(cuadricula, matrizValoresRestantes){
+
+
+    //Tiempo de inicio
+    let start = new Date().getTime();
+
+    let sudokuStr = 'Entrada: \n'+toString(cuadricula);
+
+    if( resolverSudoku( cuadricula, matrizValoresRestantes) ){
+
+        console.log('Sudoku resuelto por heurística, mirar el archivo resultado.txt');
+        sudokuStr = sudokuStr + 'Salida: \n'+toString(cuadricula);
+        writeFile(sudokuStr);
+
+    }else{
+        console.log('No pudo resolverse')
+    }
+
+
+    //Tiempo de finalizacion
+    let end = new Date().getTime();
+    let time = end - start;
+    console.log('Tiempo de ejecucion: ' + time+' ms');
+
+}
+
+
+
+
+function backtracking(cuadricula, matrizValoresRestantes){
+
+
+    //Tiempo de inicio
+    let start = new Date().getTime();
+
+    let sudokuStr = 'Entrada: \n'+toString(cuadricula);
+
+    if( resolverSudokuBacktracking( cuadricula, matrizValoresRestantes) ){
+
+        console.log('Sudoku resuelto por Backtracking, mirar el archivo resultado.txt');
+        sudokuStr = sudokuStr + 'Salida: \n'+toString(cuadricula);
+        writeFile(sudokuStr);
+
+    }else{
+        console.log('No pudo resolverse')
+    }
+
+
+    //Tiempo de finalizacion
+    let end = new Date().getTime();
+    let time = end - start;
+    console.log('Tiempo de ejecucion: ' + time+' ms');
+
 }
 
 function toString(cuadricula){
@@ -154,15 +188,18 @@ function toString(cuadricula){
 
 function writeFile(str){
 
-    var fs  = require('fs');
-
-    var writeStream = fs.createWriteStream("resultado.txt");
+    let writeStream = fs.createWriteStream("resultado.txt");
     writeStream.write(str);
     writeStream.end();
 }
 
 
 function resolverSudoku(cuadricula, matrizValoresRestantes){
+    /*
+        Resuelve el sudoku asignando valores primeramente a las casillas
+        menos restringidas.
+
+    */
 
     let casilla = getCasillaMenosRestringida(cuadricula, matrizValoresRestantes);
 
@@ -184,7 +221,7 @@ function resolverSudoku(cuadricula, matrizValoresRestantes){
             es dificil restaurar la matriz con los valores restantes a su estado anterior. (Emulacion de paso de matriz por valor)
         */
 
-        if ( asignarValor(cuadricula, copiar(matrizValoresRestantes), fila, col, valor) ){
+        if ( asignarValor(cuadricula, copiarMatrizValoresRestantes(matrizValoresRestantes), fila, col, valor) ){
             return true;
         }
 
@@ -435,7 +472,7 @@ function getCasillaMenosRestringida( cuadricula, matrizValoresRestantes ){
 
 }
 
-function copiar(matrizValoresRestantes){
+function copiarMatrizValoresRestantes(matrizValoresRestantes){
 
 
     let copia = new Array( matrizValoresRestantes.length)
@@ -456,6 +493,208 @@ function copiar(matrizValoresRestantes){
 
 }
 
+function copiarSudoku(cuadricula){
+
+
+    let copia = new Array( cuadricula.length)
+        .fill(null).map(()=> (
+            new Array(cuadricula.length)
+        ));
+
+
+    for(let i=0; i<cuadricula.length; i++){
+        for(let j=0;j<cuadricula.length; j++){
+            copia[i][j] = cuadricula[i][j];
+        }
+    }
+
+    return copia;
+
+
+}
+
+
 function calcularSalto(dimMatriz){
     return Math.sqrt(dimMatriz); //se asume que siempre va ser entero
 }
+
+
+
+function resolverSudokuLasVegas(cuadricula, matrizValoresRestantes){
+    /*
+        Resuelve el sudoku asignando valores a casillas aleatorias.
+
+    */
+
+    console.log();
+
+
+    let casilla = getCasillaAleatoria(cuadricula, matrizValoresRestantes);
+
+    let fila = casilla.fila;
+    let col = casilla.col;
+    let valoresRestantes = casilla.valoresRestantes;
+    let sudokuResuelto = casilla.sudokuResuelto;
+
+    //resuelto
+    if(sudokuResuelto){ return true }
+
+    //sin valores restantes para asignar y todavia no esta resuelto
+    if( valoresRestantes.length === 0 ){ return false}
+
+    for (const valor of valoresRestantes) {
+
+        /*
+            Para asignar valor a una celda, se envia una copia de la matriz con valores disponibles ya que en caso de que el dfs deba retroceder
+            es dificil restaurar la matriz con los valores restantes a su estado anterior. (Emulacion de paso de matriz por valor)
+        */
+
+        //nodosExpandidos= nodosExpandidos+1;
+        //console.log(nodosExpandidos)
+        if ( asignarValorLasVegas(cuadricula, copiarMatrizValoresRestantes(matrizValoresRestantes), fila, col, valor) ){
+            return true;
+        }
+
+        cuadricula[fila][col] = 0;
+
+    }
+    // console.log('------------------------------------');
+    // console.log(toString(cuadricula));
+    // console.log('Valores restantes : '+valoresRestantes);
+    // console.log('------------------------------------');
+    return false;
+
+}
+
+
+
+function asignarValorLasVegas(cuadricula, matrizValoresRestantes, fila, col, valor){
+
+    cuadricula[fila][col] = valor;
+    actualizarCuadricula(cuadricula,matrizValoresRestantes,fila,col);
+    return resolverSudokuLasVegas(cuadricula, matrizValoresRestantes);
+
+}
+
+function generarNumAleatorio(min, max){
+
+    /*
+        Genera numeros aleatorios mayores o iguales a min y menores o iguales a max
+    */
+
+    return Math.floor(Math.random()*(max-min+1))+min;
+
+}
+
+
+
+
+
+function getCasillaAleatoria( cuadricula, matrizValoresRestantes ){
+
+    /*
+        Busca casillas libres y entre ellas elige una aleatoria.
+    */
+
+    let casillasLibres = [];
+
+    for(let i=0; i< cuadricula.length; i++){
+        for(let j=0; j< cuadricula.length; j++) {
+
+            if (cuadricula[i][j] === 0) {
+                casillasLibres.push({fila: i, col: j});
+            }
+
+        }
+
+    }
+
+    if( casillasLibres.length === 0){
+        return { valoresRestantes: [], fila: undefined, col: undefined, sudokuResuelto: true};
+    }
+
+    let min = 0;
+    let max = casillasLibres.length -1;
+    let posAleatoria = generarNumAleatorio(min, max);
+    let fila = casillasLibres[posAleatoria].fila;
+    let col = casillasLibres[posAleatoria].col;
+
+    return { valoresRestantes: Array.from( matrizValoresRestantes[fila][col] ), fila: fila, col: col, sudokuResuelto: false};
+
+}
+
+
+function resolverSudokuBacktracking(cuadricula, matrizValoresRestantes){
+    /*
+        Resuelve el sudoku asignando valores primeramente a las casillas
+        menos restringidas.
+
+    */
+
+    let casilla = getCasilla(cuadricula, matrizValoresRestantes);
+
+    let fila = casilla.fila;
+    let col = casilla.col;
+    let valoresRestantes = casilla.valoresRestantes;
+    let sudokuResuelto = casilla.sudokuResuelto;
+
+    //resuelto
+    if(sudokuResuelto){ return true }
+
+    //sin valores restantes para asignar y todavia no esta resuelto
+    if( valoresRestantes.length === 0 ){ return false}
+
+    for (const valor of valoresRestantes) {
+
+        /*
+            Para asignar valor a una celda, se envia una copia de la matriz con valores disponibles ya que en caso de que el dfs deba retroceder
+            es dificil restaurar la matriz con los valores restantes a su estado anterior. (Emulacion de paso de matriz por valor)
+        */
+
+        if ( asignarValorBacktracking(cuadricula, copiarMatrizValoresRestantes(matrizValoresRestantes), fila, col, valor) ){
+            return true;
+        }
+
+        cuadricula[fila][col] = 0;
+
+    }
+
+    return false;
+
+}
+
+
+
+function getCasilla( cuadricula, matrizValoresRestantes ){
+
+    /*
+        Busca casillas libres
+    */
+
+
+    for(let i=0; i< cuadricula.length; i++){
+        for(let j=0; j< cuadricula.length; j++) {
+
+            if (cuadricula[i][j] === 0) {
+                return { valoresRestantes: Array.from( matrizValoresRestantes[i][j]), fila: i, col: j, sudokuResuelto: false};
+            }
+
+        }
+
+    }
+
+
+    return { valoresRestantes: [], fila: undefined, col: undefined, sudokuResuelto: true};
+
+}
+
+
+
+function asignarValorBacktracking(cuadricula, matrizValoresRestantes, fila, col, valor){
+
+    cuadricula[fila][col] = valor;
+    actualizarCuadricula(cuadricula,matrizValoresRestantes,fila,col);
+    return resolverSudokuBacktracking(cuadricula, matrizValoresRestantes);
+
+}
+
