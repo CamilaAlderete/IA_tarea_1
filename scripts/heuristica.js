@@ -50,7 +50,7 @@ function resolverSudoku(cuadricula, matrizValoresRestantes){
     if(sudokuResuelto){ return true }
 
     //sin valores restantes para asignar y todavia no esta resuelto
-    if( valoresRestantes.size === 0 ){ return false}
+    if( valoresRestantes.length === 0 ){ return false}
 
     for (const valor of valoresRestantes) {
 
@@ -66,10 +66,7 @@ function resolverSudoku(cuadricula, matrizValoresRestantes){
         cuadricula[fila][col] = 0;
 
     }
-    // console.log('------------------------------------');
-    // console.log(toString(cuadricula));
-    // console.log('Valores restantes : '+valoresRestantes);
-    // console.log('------------------------------------');
+
     return false;
 
 }

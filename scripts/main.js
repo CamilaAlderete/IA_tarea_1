@@ -1,8 +1,8 @@
 //https://sudokuspoiler.com/sudoku/sudoku9
 //https://sudoku.com/es/evil/
-import sudokus_9x9_easy from './sudokus y soluciones/sudokus_9x9_easy.js';
-import sudokus_16x16_easy from './sudokus y soluciones/sudokus_16x16_easy.js';
-import sudokus_16x16_medium from "./sudokus y soluciones/sudokus_16x16_medium.js";
+import sudokus_9x9_easy from '../sudokus y soluciones/sudokus_9x9_easy.js';
+import sudokus_16x16_easy from '../sudokus y soluciones/sudokus_16x16_easy.js';
+import sudokus_16x16_medium from "../sudokus y soluciones/sudokus_16x16_medium.js";
 
 import resolverPorBacktracking from "./backtracking.js"
 import resolverPorLasVegas from "./lasVegas.js"
@@ -19,7 +19,30 @@ main();
 
 function main() {
 
-    //dificultad experto cuadricula2_3x3
+
+    //let cuadricula = copiarSudoku(sudokus_9x9_easy[0]);
+    //let cuadricula = copiarSudoku(sudokus_16x16_easy[0]);
+    let cuadricula = copiarSudoku(sudokus_16x16_medium[0]);
+
+
+    resolverPorHeuristica(cuadricula);
+    //resolverPorLasVegas(cuadricula);
+    //resolverPorBacktracking(cuadricula);
+
+}
+
+
+
+
+
+
+
+
+
+/*
+
+
+//dificultad experto cuadricula2_3x3
     let cuadricula2_3x3 = [
         [0, 0, 0,   0, 0, 2,    0, 8, 0],
         [0, 0, 9,   0, 7, 0,    0, 0, 4],
@@ -64,25 +87,7 @@ function main() {
         [0, 4, 0,   0, 0, 0,    0, 8, 0]
     ]
 
-
-    //let cuadricula = copiarSudoku(sudokus_9x9_easy[0]);
-    //let cuadricula = copiarSudoku(sudokus_16x16_easy[0]);
-    let cuadricula = copiarSudoku(sudokus_16x16_medium[0]);
-
-
-
-
-    //resolverPorHeuristica(cuadricula);
-    //resolverPorLasVegas(cuadricula);
-    resolverPorBacktracking(cuadricula);
-
-}
-
-
-
-
-
-
+*/
 
 
 
