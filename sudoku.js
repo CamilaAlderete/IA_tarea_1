@@ -1,4 +1,4 @@
-//Tabla graficada dada una matriz que se ingresa por el usuario
+//sudoku con backtracking
 function tableToArray(table) {
     let result = [].reduce.call(table.rows, function (result, row) {
         result.push([].reduce.call(row.cells, function (res, cell) {
@@ -11,14 +11,54 @@ function tableToArray(table) {
     return result;
 }
 
-function checkInput(value) {
-    let regex = /^\d*$/.test(value) && parseInt(value) > 0 && parseInt(value) <= 9;
+/*
+    Validar que la entrada sean valores del 1 al tablero.length
+*/
+function validarEntrada(value) {
+    let regex = /^\d*$/.test(value) && parseInt(value) > 0 && parseInt(value) <= tablero.length;
     return !regex ? value.replace(value, '') : value
 }
 
-function checkColumn(board, column, value) {
-    for (let i = 0; i < board.length; i++) {
-        if (board[i][column] === value) {
+function ok()
+{
+    var tamanho = document.getElementById("inputTamanho").value;
+    leerTamanho(tamanho);
+}
+function leerTamanho(tamanho) {
+    console.log(tamanho);
+    let table = document.getElementById('sudoku');
+    let tableBody = table.getElementsByTagName('tbody')[0];
+    let tableRows = tableBody.getElementsByTagName('tr');
+    let tableCells = tableRows[0].getElementsByTagName('td');
+    let input = tableCells[0].getElementsByTagName('input')[0];
+    	
+    let size = parseInt(tamanho);
+
+    if (size < 4 || size > 16) {
+        alert("El tamaño debe ser entre 4 y 16");
+        tamanho = "";
+        return;
+    }
+
+    tableBody.innerHTML = "";
+    input.value = "";
+    input.classList.remove("input-solved");
+
+    for (let i = 0; i < size; i++) {
+        let row = tableBody.insertRow(i);
+        for (let j = 0; j < size; j++) {
+            let cell = row.insertCell(j);
+            cell.innerHTML = `<input type="text" class="input-cell" maxlength="1" onkeyup="this.value=validarEntrada(this.value)" />`;
+        }
+    }
+
+    //table.style.width = `${size * 40}px`;
+    //table.style.height = `${size * 40}px`;
+
+}
+function esColumnaValida(tablero, column, value) {
+    for (let i = 0; i < tablero.length; i++) {
+        if (tablero[i][column] === value) {
             return false;
         }
     }
@@ -26,9 +66,9 @@ function checkColumn(board, column, value) {
     return true;
 }
 
-function checkRow(board, row, value) {
-    for (let i = 0; i < board[row].length; i++) {
-        if (board[row][i] === value) {
+function esFilaValida(tablero, row, value) {
+    for (let i = 0; i < tablero[row].length; i++) {
+        if (tablero[row][i] === value) {
             return false;
         }
     }
@@ -36,13 +76,15 @@ function checkRow(board, row, value) {
     return true;
 }
 
-function checkSquare(board, row, column, value) {
-    let squareRow = Math.floor(row / 3) * 3;
-    let squareCol = Math.floor(column / 3) * 3;
+function esRegionValida(tablero, row, column, value) {
+    
+    let regionSize = Math.sqrt(tablero.length);
+    let squareRow = Math.floor(row / regionSize) * regionSize;
+    let squareCol = Math.floor(column / regionSize) * regionSize;
 
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-            if (board[squareRow + i][squareCol + j] === value)
+    for (let i = 0; i < regionSize; i++) {
+        for (let j = 0; j < regionSize; j++) {
+            if (tablero[squareRow + i][squareCol + j] === value)
                 return false;
         }
     }
@@ -50,20 +92,20 @@ function checkSquare(board, row, column, value) {
     return true;
 };
 
-function checkValue(board, row, column, value) {
-    if (checkRow(board, row, value) &&
-        checkColumn(board, column, value) &&
-        checkSquare(board, row, column, value)) {
+function esValorValido(tablero, row, column, value) {
+    if (esFilaValida(tablero, row, value) &&
+        esColumnaValida(tablero, column, value) &&
+        esRegionValida(tablero, row, column, value)) {
         return true;
     }
 
     return false;
 };
 
-function findEmptyCell(board) {
-    for (let i = 0; i < 9; i++) {
-        for (let j = 0; j < 9; j++) {
-            if (board[i][j] === 0)
+function buscarCasillaDisponible(tablero) {
+    for (let i = 0; i < tablero.length; i++) {
+        for (let j = 0; j < tablero.length; j++) {
+            if (tablero[i][j] === 0)
                 return [i, j];
         }
     }
@@ -71,35 +113,35 @@ function findEmptyCell(board) {
     return [-1, -1];
 }
 
-function solve(board) {
+function resolverSudoku(tablero) {
     let table = document.getElementById('sudoku');
-    let emptyCell = findEmptyCell(board);
+    let emptyCell = buscarCasillaDisponible(tablero);
     let row = emptyCell[0];
     let col = emptyCell[1];
 
     if (row === -1 || col === -1) {
-        return board;
+        return tablero;
     }
 
     let num = 1;
     do {
-        if (checkValue(board, row, col, num)) {
-            board[row][col] = num;
+        if (esValorValido(tablero, row, col, num)) {
+            tablero[row][col] = num;
             let inputCell = table.rows[row].cells[col].children[0];
             inputCell.value = num;
-            inputCell.classList.add("input-solved"); // add class css
-            solve(board);
+            inputCell.classList.add("input-solved");
+            resolverSudoku(tablero);
         }
-    } while (++num <= 9)
+    } while (++num <= tablero.length)
 
-    if (findEmptyCell(board)[0] !== -1) {
-        board[row][col] = 0;
+    if (buscarCasillaDisponible(tablero)[0] !== -1) {
+        tablero[row][col] = 0;
     }
 
-    return board;
+    return tablero;
 }
 
-function resetInputs() {
+function reiniciarEntrada() {
     let inputs = document.getElementsByTagName("input");
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].type == "text") {
@@ -110,6 +152,6 @@ function resetInputs() {
 }
 
 function main(table) {
-    let board = tableToArray(table);
-    solve(board);
+    let tablero = tableToArray(table);
+    resolverSudoku(tablero);
 }

@@ -11,112 +11,116 @@
 
 <body>
     <div class="main">
-        <h2>Please !! Enter the numbers of the puzzle you want to solve in the grid, and click the Solve button.</h2>
+        <h2>Sudoku backtracking</h2>
+        <label id="label">Ingresa el tamanho del tablero :</label>
+        <input type="text" id="inputTamanho"/>
+        <button type="submit" id="click" onclick="ok()">enviar</button>
+        <h3></h3>
         <table class="table" id="sudoku">
             <tbody>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
                 <tr>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
-                    <td><input class="input" type="text" oninput="this.value=checkInput(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
+                    <td><input class="input" type="text" oninput="this.value=validarEntrada(this.value)" /></td>
                 </tr>
             </tbody>
         </table>
-        <input type="button" value="SOLVE" id="solve" class="solve" onclick="main(document.getElementById('sudoku'))">
-        <input type="button" value="RESET" id="reset" class="reset" onclick="resetInputs()">
+        <input type="button" value="Resolver" id="resolverSudoku" class="resolverSudoku" onclick="main(document.getElementById('sudoku'))">
+        <input type="button" value="Reiniciar" id="reset" class="reset" onclick="reiniciarEntrada()">
     </div>
     <script src="sudoku.js"></script>
 </body>
