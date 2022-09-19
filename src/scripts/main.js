@@ -22,14 +22,14 @@ function main() {
 
 
     //let cuadricula = copiarSudoku(sudokus_9x9_easy[0]);
-    //let cuadricula = copiarSudoku(sudokus_16x16_easy[0]);
+    let cuadricula = copiarSudoku(sudokus_16x16_easy[0]);
     //let cuadricula = copiarSudoku(sudokus_16x16_medium[0]);
-    let cuadricula = copiarSudoku(sudokus_25x25[0]);
+    //let cuadricula = copiarSudoku(sudokus_25x25[0]);
 
-  console.log('holaaa');
-    resolverPorHeuristica(cuadricula);
+    console.log('holaaa');
+    //resolverPorHeuristica(cuadricula);
     //resolverPorLasVegas(cuadricula);
-    //resolverPorBacktracking(cuadricula);
+    resolverPorBacktracking(cuadricula);
     console.log()
 
 }
