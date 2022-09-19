@@ -1,4 +1,11 @@
 # Inteligencia Artificial - Tarea 1
+
+### Grupo 2
+
+* Luis Alberto Cañete Baez
+* Oscar Leonardo Pedrozo Gonzalez
+* Camila Montserrar Alderete Gonzalez
+
 ### Sudoku
 El objetivo del sudoku es rellenar una cuadrícula de 9x9 celdas dividida en subcuadrículas de 3x3 (también llamadas "cajas" o "regiones") con las cifras del 1 al 9 partiendo de algunos números ya dispuestos en algunas de las celdas. No se debe repetir ninguna cifra en una misma fila, columna o subcuadrícula.
 El n-sudoku corresponde al sudoku con NxN celdas, es decir el sudoku 9x9 corresponde al n-sudoku con n=9. Probar el algoritmo con N potencia de 3 (ej: 3, 9), especialmente con N=9. Utilizar juegos conocidos (De internet por ejemplo) o ver una estrategia para generar juegos válidos. Heurística posible: MVR (mínimo de valores restantes o también conocida como variable más restringida)
@@ -15,4 +22,8 @@ algoritmo Heurístico que utilice alguna heurística aplicable al PSR en cuesti�
 - Enfocar presentación del trabajo a los resultados obtenidos y visualizar el programa.
 - El programa a entregar debe tener GUI, y debe ser posible parametrizar el tamaño del problema (N) y otros parámetros propios de cada problema.
 - Durante la presentación haremos una demostración práctica, en donde correríamos el programa varias veces cambiando los parámetros.
+
+### Montar proyecto
+- Montar proyecto: nmp i
+- Ejecutar: ng serve
 
