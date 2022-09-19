@@ -3,6 +3,7 @@ import * as funciones from "./funciones";
 var nodos = 0;
 
 export function resolver(cuadricula:number[][]){
+  nodos = 0;
   return new Promise((resolve) => {
     resolve(iniciar( funciones.copiarSudoku(cuadricula) ));
 
@@ -40,7 +41,7 @@ function iniciar(cuadricula:number[][]){
     console.log('Tiempo de ejecucion: ' + time+' ms');
 
     //return {cuadricula: cuadricula, tiempo:time, resuelto: resuelto, nodos: nodos};
-    return {cuadricula: cuadricula, tiempo:time, resuelto: resuelto};
+    return {cuadricula: cuadricula, tiempo:time, resuelto: resuelto, nodos: nodos};
 
 }
 
@@ -67,7 +68,9 @@ function resolverSudoku(cuadricula:number[][], matrizValoresRestantes:any[][]){
     //resuelto
     if(sudokuResuelto){ return true }
 
-    //sin valores restantes para asignar y todavia no esta resuelto
+    nodos = nodos +1;
+
+  //sin valores restantes para asignar y todavia no esta resuelto
     if( valoresRestantes.length === 0 ){ return false}
 
     for (const valor of valoresRestantes) {
