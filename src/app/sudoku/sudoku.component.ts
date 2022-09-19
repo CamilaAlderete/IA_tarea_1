@@ -138,7 +138,7 @@ export class SudokuComponent implements OnInit {
       this.cuadricula = data.cuadricula;
       this.toString();
       let dim = this.cuadricula.length;
-      let resultado = { tamanho: dim+'x'+dim, algoritmo:'Heurística', tiempo:data.tiempo, nodos:0}
+      let resultado = { tamanho: dim+'x'+dim, algoritmo:'Heurística', tiempo:data.tiempo, nodos:data.nodos}
       this.resultados.data.push(resultado);
       this.resultados.data = this.resultados.data;
 
@@ -151,7 +151,7 @@ export class SudokuComponent implements OnInit {
       this.cuadricula = data.cuadricula;
       this.toString();
       let dim = this.cuadricula.length;
-      let resultado = { tamanho: dim+'x'+dim, algoritmo:'Backtracking', tiempo:data.tiempo, nodos:0}
+      let resultado = { tamanho: dim+'x'+dim, algoritmo:'Backtracking', tiempo:data.tiempo, nodos:data.nodos}
       this.resultados.data.push(resultado);
       this.resultados.data = this.resultados.data;
 
@@ -165,7 +165,7 @@ export class SudokuComponent implements OnInit {
       this.cuadricula = data.cuadricula;
       this.toString();
       let dim = this.cuadricula.length;
-      let resultado = { tamanho: dim+'x'+dim, algoritmo:'Las Vegas', tiempo:data.tiempo, nodos:0}
+      let resultado = { tamanho: dim+'x'+dim, algoritmo:'Las Vegas', tiempo:data.tiempo, nodos:data.nodos}
       this.resultados.data.push(resultado);
       this.resultados.data = this.resultados.data;
 
