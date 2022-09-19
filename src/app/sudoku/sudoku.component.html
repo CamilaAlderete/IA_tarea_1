@@ -19,23 +19,28 @@
       </mat-select>
     </mat-form-field>
 
+    <!----
     <mat-form-field appearance="fill" [hidden]="oculto" >
       <mat-label>Dificultad</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let d of dificultades" [value]="d" [(ngModel)]="dificultad">
+      <mat-select [(ngModel)]="dificultad">
+        <mat-option *ngFor="let d of dificultades" [value]="d">
           {{d}}
         </mat-option>
       </mat-select>
-    </mat-form-field>
+    </mat-form-field> --->
 
     <mat-form-field appearance="fill">
       <mat-label>Algoritmo</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let a of algoritmos" [value]="a" [(ngModel)]="algoritmo">
+      <mat-select [(ngModel)]="algoritmo">
+        <mat-option *ngFor="let a of algoritmos" [value]="a">
           {{a}}
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <div>
+      <button mat-raised-button (click)="getSudokuAleatorio()">Buscar</button>
+    </div>
 
     <div>
       <button mat-raised-button (click)="click()">Resolver</button>

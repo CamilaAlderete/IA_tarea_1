@@ -6,8 +6,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as heuristica from '../../assets/heuristica';
 import * as backtracking from '../../assets/backtracking';
 import * as lasVegas from '../../assets/lasVegas';
-import * as sudokus_9x9_easy from '../../assets/sudokus_9x9_easy';
+//import * as sudokus_9x9_easy from '../../assets/sudokus_9x9_easy';
 import * as funciones from '../../assets/funciones';
+import {sudokus_9x9_easy} from '../../assets/sudokus_9x9_easy';
+import {sudokus_9x9_medium} from '../../assets/sudokus_9x9_medium';
+import {sudokus_9x9_difficult} from '../../assets/sudokus_9x9_difficult';
+import {sudokus_16x16_easy} from '../../assets/sudokus_16x16_easy';
+import {sudokus_16x16_medium} from '../../assets/sudokus_16x16_medium';
+import {sudokus_25x25} from '../../assets/sudokus_25x25';
 
 
 @Component({
@@ -17,13 +23,19 @@ import * as funciones from '../../assets/funciones';
 })
 export class SudokuComponent implements OnInit {
 
+  /*
+
+    Observación: desde 16x16 el backtracking se vuelve demasiado lento, y para el 25x25 heuristica ya es demasiado lento y
+    consume muchos recursos.
+
+   */
 
   oculto = false;
-  dimension = ''; algoritmo = ''; dificultad= '';
-  dimensiones = [ '9x9', '16x16', '25x25', '49x49', '64x64'];
+  dimension = '9x9'; algoritmo = 'Backtracking'; dificultad= 'Facil';
+  dimensiones = [ '9x9', '16x16', '25x25'];
   algoritmos = ['Backtracking', 'Las Vegas', 'Heurística'];
   displayedColumns = ['tamaño', 'algoritmo', 'tiempo', 'nodos'];
-  dificultades:any = [];
+  dificultades = ['Facil', 'Medio', 'Dificil'];
   resultados = new MatTableDataSource<any>();
 
   cadena:any = '';
@@ -51,11 +63,6 @@ export class SudokuComponent implements OnInit {
     this.toString();
 
   }
-
-  //click(){
-    //lib.prueba();
-
-  //}
 
 
 
@@ -89,9 +96,9 @@ export class SudokuComponent implements OnInit {
 
         let str = this.cuadricula[i][j].toString();
         if (str.length === 1) {
-          str = '     ' + str;
-        }else{
           str = '    ' + str;
+        }else{
+          str = '   ' + str;
         }
 
         row = row + str;
@@ -109,9 +116,21 @@ export class SudokuComponent implements OnInit {
   }
 
   click(){
-        //this.resolverPorHeuristica();
-        //this.resolverPorBacktracking();
+
+    if(this.dificultad !== '' && this.dimension !== '') {
+
+      if (this.algoritmo === 'Backtracking') {
+        this.resolverPorBacktracking();
+      } else if (this.algoritmo === 'Las Vegas') {
+        this.resolverPorLasVegas();
+      } else if (this.algoritmo === 'Heurística') {
         this.resolverPorHeuristica();
+      }
+
+      console.log('espera?');
+
+    }
+
   }
 
   async resolverPorHeuristica(){
@@ -158,14 +177,55 @@ export class SudokuComponent implements OnInit {
     let min = 0;
     if(this.dimension === '9x9'){
 
-      let max = 9;
-      let posAleatoria: number = Math.floor(Math.random()*(max-min))+min;
+      if(this.dificultad === 'Facil'){
+
+        let max = sudokus_9x9_easy.length;
+        let posAleatoria: number = Math.floor(Math.random()*(max-min))+min;
+        this.cuadricula = funciones.copiarSudoku(sudokus_9x9_easy[posAleatoria]);
+        this.toString();
+
+      }/*else if(this.dificultad === 'Medio'){
+
+        let max = sudokus_9x9_medium.length;
+        let posAleatoria: number = Math.floor(Math.random()*(max-min))+min;
+        this.cuadricula = funciones.copiarSudoku(sudokus_9x9_medium[posAleatoria]);
+        this.toString();
+
+      }else if(this.dificultad === 'Dificil'){
+
+        let max = sudokus_9x9_difficult.length;
+        let posAleatoria: number = Math.floor(Math.random()*(max-min))+min;
+        this.cuadricula = funciones.copiarSudoku(sudokus_9x9_difficult[posAleatoria]);
+        this.toString();
+
+      }*/
+
+    }if(this.dimension === '16x16'){
 
       if(this.dificultad === 'Facil'){
-        //this.cuadricula = funciones.copiarSudoku(sudokus_9x9_easy[posAleatoria]);
-      }
+
+        let max = sudokus_16x16_easy.length;
+        let posAleatoria: number = Math.floor(Math.random()*(max-min))+min;
+        this.cuadricula = funciones.copiarSudoku(sudokus_16x16_easy[posAleatoria]);
+
+        this.toString();
+      }/*else if(this.dificultad === 'Medio') {
+
+        let max = sudokus_16x16_medium.length;
+        let posAleatoria: number = Math.floor(Math.random() * (max - min)) + min;
+        this.cuadricula = funciones.copiarSudoku(sudokus_16x16_medium[posAleatoria]);
+        this.toString();
+
+      }*/
+    }if(this.dimension === '25x25'){
+
+        let max = sudokus_25x25.length;
+        let posAleatoria: number = Math.floor(Math.random()*(max-min))+min;
+        this.cuadricula = funciones.copiarSudoku(sudokus_25x25[posAleatoria]);
+        this.toString();
 
     }
+
   }
 
 

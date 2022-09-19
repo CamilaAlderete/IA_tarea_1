@@ -3,6 +3,7 @@
 import sudokus_9x9_easy from '../../sudokus y soluciones/sudokus_9x9_easy.js';
 import sudokus_16x16_easy from '../../sudokus y soluciones/sudokus_16x16_easy.js';
 import sudokus_16x16_medium from "../../sudokus y soluciones/sudokus_16x16_medium.js";
+import sudokus_25x25 from "../../sudokus y soluciones/sudokus_25x25.js";
 
 import resolverPorBacktracking from "./backtracking.js"
 import resolverPorLasVegas from "./lasVegas.js"
@@ -22,12 +23,14 @@ function main() {
 
     //let cuadricula = copiarSudoku(sudokus_9x9_easy[0]);
     //let cuadricula = copiarSudoku(sudokus_16x16_easy[0]);
-    let cuadricula = copiarSudoku(sudokus_16x16_medium[0]);
+    //let cuadricula = copiarSudoku(sudokus_16x16_medium[0]);
+    let cuadricula = copiarSudoku(sudokus_25x25[0]);
 
-
+  console.log('holaaa');
     resolverPorHeuristica(cuadricula);
     //resolverPorLasVegas(cuadricula);
     //resolverPorBacktracking(cuadricula);
+    console.log()
 
 }
 

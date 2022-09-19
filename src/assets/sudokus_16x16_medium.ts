@@ -1,6 +1,6 @@
 
 
-var sudokus_16x16_medium = [
+export const sudokus_16x16_medium = [
 
     [
         [ 8, 7, 0, 0,    0, 0, 0, 0,     0, 3, 0, 0,     13, 0, 4, 0],
@@ -28,4 +28,3 @@ var sudokus_16x16_medium = [
 
 
 ]
-export default sudokus_16x16_medium;

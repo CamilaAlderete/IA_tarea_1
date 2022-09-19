@@ -1,14 +1,15 @@
 //https://sudokuspoiler.com/sudoku/sudoku9
 //https://sudoku.com/es/evil/
-import sudokus_9x9_easy from './sudokus_9x9_easy';
-import sudokus_16x16_easy from './sudokus_16x16_easy';
-import sudokus_16x16_medium from "./sudokus_16x16_medium";
+
 
 import * as backtracking from "./backtracking"
 import * as lasVegas from "./lasVegas"
 import * as heuristica from "./heuristica"
 
 import * as funciones from "./funciones";
+
+import {sudokus_25x25} from './sudokus_25x25';
+import {sudokus_9x9_easy} from './sudokus_9x9_easy';
 
 
 
@@ -20,16 +21,19 @@ main();
 export function main() {
 
 
-    //let cuadricula = copiarSudoku(sudokus_9x9_easy[0]);
+    let cuadricula = funciones.copiarSudoku(sudokus_9x9_easy[0]);
     //let cuadricula = copiarSudoku(sudokus_16x16_easy[0]);
-    let cuadricula = funciones.copiarSudoku(sudokus_16x16_medium[0]);
+    //let cuadricula = funciones.copiarSudoku(sudokus_16x16_medium[0]);
+     // let cuadricula = funciones.copiarSudoku(sudokus_25x25[0]);
 
 
     //return heuristica.resolverPorHeuristica(cuadricula);
     //lasVegas.resolverPorLasVegas(cuadricula);
     //backtracking.resolverPorBacktracking(cuadricula);
 
-  //alert('Resuelto?');
+  let a = heuristica.resolver(cuadricula);
+
+  //console.log()
 
 }
 
