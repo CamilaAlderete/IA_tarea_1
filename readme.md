@@ -16,5 +16,3 @@ algoritmo Heurístico que utilice alguna heurística aplicable al PSR en cuesti�
 - El programa a entregar debe tener GUI, y debe ser posible parametrizar el tamaño del problema (N) y otros parámetros propios de cada problema.
 - Durante la presentación haremos una demostración práctica, en donde correríamos el programa varias veces cambiando los parámetros.
 
-### Dependencias    
-    npm install fs

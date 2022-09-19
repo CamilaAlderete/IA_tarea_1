@@ -1,0 +1,101 @@
+<div class="container">
+
+  <div class="d-flex justify-content-center m-3">
+    <h2>Sudoku</h2>
+  </div>
+
+  <div class="d-flex justify-content-around m-2">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tamaño</mat-label>
+      <mat-select
+        ngDefaultControl
+        [(ngModel)]="dimension"
+        (ngModelChange) = "getDificultad()"
+      >
+        <mat-option *ngFor="let d of dimensiones" [value]="d" >
+          {{d}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!----
+    <mat-form-field appearance="fill" [hidden]="oculto" >
+      <mat-label>Dificultad</mat-label>
+      <mat-select [(ngModel)]="dificultad">
+        <mat-option *ngFor="let d of dificultades" [value]="d">
+          {{d}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> --->
+
+    <mat-form-field appearance="fill">
+      <mat-label>Algoritmo</mat-label>
+      <mat-select [(ngModel)]="algoritmo">
+        <mat-option *ngFor="let a of algoritmos" [value]="a">
+          {{a}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div>
+      <button mat-raised-button (click)="getSudokuAleatorio()">Buscar</button>
+    </div>
+
+    <div>
+      <button mat-raised-button (click)="click()">Resolver</button>
+    </div>
+
+  </div>
+
+  <div  class="d-flex justify-content-around m-3">
+    <div >
+
+      <div *ngFor="let row of sudokuStr">
+        <div><h4><pre>{{row}}</pre></h4></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-around m-2">
+    <table mat-table [dataSource]="resultados" class="mat-elevation-z1 col-12">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="tamaño">
+        <th mat-header-cell *matHeaderCellDef> Tamaño </th>
+        <td mat-cell *matCellDef="let element"> {{element.tamanho}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="algoritmo">
+        <th mat-header-cell *matHeaderCellDef> Algoritmo </th>
+        <td mat-cell *matCellDef="let element"> {{element.algoritmo}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="tiempo">
+        <th mat-header-cell *matHeaderCellDef> Tiempo de ejecución (ms)</th>
+        <td mat-cell *matCellDef="let element"> {{element.tiempo}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="nodos">
+        <th mat-header-cell *matHeaderCellDef> Nodos expandidos </th>
+        <td mat-cell *matCellDef="let element"> {{element.nodos}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+
+  <br><br>
+
+</div>
+
+
