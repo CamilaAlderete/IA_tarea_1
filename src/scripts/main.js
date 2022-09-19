@@ -21,7 +21,7 @@ main();
 function main() {
 
 
-    //let cuadricula = copiarSudoku(sudokus_9x9_easy[0]);
+    //let cuadricula = copiarSudoku(sudokus_9x9[0]);
     let cuadricula = copiarSudoku(sudokus_16x16_easy[1]);
     //let cuadricula = copiarSudoku(sudokus_16x16_medium[0]);
     //let cuadricula = copiarSudoku(sudokus_25x25[0]);

@@ -1,6 +1,6 @@
 
 
-export const sudokus_16x16_easy = [
+export const sudokus_16x16 = [
 
     [
         [ 0,11, 9, 0,    0,16,13, 4,     0, 0,14, 0,     10, 6,15, 0],

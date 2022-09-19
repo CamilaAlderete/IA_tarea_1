@@ -18,7 +18,7 @@
 
 
 
-export const sudokus_9x9_easy =
+export const sudokus_9x9 =
 
 [
 

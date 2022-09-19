@@ -6,13 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as heuristica from '../../assets/heuristica';
 import * as backtracking from '../../assets/backtracking';
 import * as lasVegas from '../../assets/lasVegas';
-//import * as sudokus_9x9_easy from '../../assets/sudokus_9x9_easy';
 import * as funciones from '../../assets/funciones';
-import {sudokus_9x9_easy} from '../../assets/sudokus_9x9_easy';
-import {sudokus_9x9_medium} from '../../assets/sudokus_9x9_medium';
-import {sudokus_9x9_difficult} from '../../assets/sudokus_9x9_difficult';
-import {sudokus_16x16_easy} from '../../assets/sudokus_16x16_easy';
-import {sudokus_16x16_medium} from '../../assets/sudokus_16x16_medium';
+import {sudokus_9x9} from '../../assets/sudokus_9x9';
+import {sudokus_16x16} from '../../assets/sudokus_16x16';
 import {sudokus_25x25} from '../../assets/sudokus_25x25';
 
 
@@ -179,9 +175,9 @@ export class SudokuComponent implements OnInit {
 
       if(this.dificultad === 'Facil'){
 
-        let max = sudokus_9x9_easy.length;
+        let max = sudokus_9x9.length;
         let posAleatoria: number = Math.floor(Math.random()*(max-min))+min;
-        this.cuadricula = funciones.copiarSudoku(sudokus_9x9_easy[posAleatoria]);
+        this.cuadricula = funciones.copiarSudoku(sudokus_9x9[posAleatoria]);
         this.toString();
 
       }/*else if(this.dificultad === 'Medio'){
@@ -204,9 +200,9 @@ export class SudokuComponent implements OnInit {
 
       if(this.dificultad === 'Facil'){
 
-        let max = sudokus_16x16_easy.length;
+        let max = sudokus_16x16.length;
         let posAleatoria: number = Math.floor(Math.random()*(max-min))+min;
-        this.cuadricula = funciones.copiarSudoku(sudokus_16x16_easy[posAleatoria]);
+        this.cuadricula = funciones.copiarSudoku(sudokus_16x16[posAleatoria]);
 
         this.toString();
       }/*else if(this.dificultad === 'Medio') {
